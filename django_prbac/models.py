@@ -8,6 +8,7 @@ import weakref
 # Django imports
 from django.db import models
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 
 # External Library imports
 import jsonfield
@@ -66,6 +67,11 @@ class Role(ValidatingModel, models.Model):
         help_text='A set of strings which are the parameters for this role. Entered as a JSON list.',
         blank=True,
         default=set,
+    )
+
+    is_system = models.BooleanField(
+        default=False,
+        help_text=_('Indicates whether or not the role is a system Role or custom'),
     )
 
     class Meta:
